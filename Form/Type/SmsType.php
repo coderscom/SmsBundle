@@ -43,6 +43,9 @@ class SmsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
         $builder->addEventSubscriber(new CleanFormSubscriber(['content' => 'html', 'customHtml' => 'html']));
         $builder->addEventSubscriber(new FormExitSubscriber('sms.sms', $options));
 
@@ -53,6 +56,16 @@ class SmsType extends AbstractType
                 'label'      => 'mautic.sms.form.internal.name',
                 'label_attr' => ['class' => 'control-label'],
                 'attr'       => ['class' => 'form-control'],
+            ]
+        );
+        $builder->add(
+            'senderNumber',
+            'text',
+            [
+                'label'      => 'mautic.sms.form.sender.number',
+                'label_attr' => ['class' => 'control-label'],
+                'attr'       => ['class' => 'form-control'],
+                'required'   => false,
             ]
         );
 
@@ -66,6 +79,7 @@ class SmsType extends AbstractType
                 'required'   => false,
             ]
         );
+
 
         $builder->add(
             'message',

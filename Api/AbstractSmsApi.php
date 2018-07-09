@@ -35,10 +35,11 @@ abstract class AbstractSmsApi
     /**
      * @param string $number
      * @param string $content
+     * @param string $fromNumber
      *
      * @return mixed
      */
-    abstract public function sendSms($number, $content);
+    abstract public function sendSms($number, $content, $fromNumber);
 
     /**
      * Convert a non-tracked url to a tracked url.

@@ -89,17 +89,18 @@ class TransportChain
     /**
      * @param $number
      * @param $content
+     * @param $fromNumber
      *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function sendSms($number, $content)
+    public function sendSms($number, $content, $fromNumber)
     {
         $this->logger->addInfo('Sending an SMS message using '
                             .$this->transports[$this->primaryTransport]['integrationAlias'].' to '
                             .(is_array($number) ? join(',', $number) : $number));
-        $response = $this->getPrimaryTransport()->sendSms($number, $content);
+        $response = $this->getPrimaryTransport()->sendSms($number, $content, $fromNumber);
 
         return $response;
     }

@@ -16,6 +16,12 @@ $view->addGlobal('mauticContent', 'sms');
 ?>
 
 <?php $view['slots']->start('primaryFormContent'); ?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?php echo $view['form']->row($form['senderNumber']); ?>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6">
         <?php echo $view['form']->row($form['name']); ?>

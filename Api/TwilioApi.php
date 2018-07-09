@@ -81,18 +81,29 @@ class TwilioApi extends AbstractSmsApi
     /**
      * @param string $number
      * @param string $content
+     * @param string $fromNumber
      *
      * @return bool|string
      */
-    public function sendSms($number, $content)
+    public function sendSms($number, $content, $fromNumber)
     {
+       
         if ($number === null) {
             return false;
         }
-
+        if ($fromNumber === 'null' || $fromNumber == '') {
+             $fromNum = $this->sendingPhoneNumber;
+        }else{
+             $fromNum = $fromNumber;
+        }
         try {
-            $this->client->account->messages->sendMessage(
+            /*$this->client->account->messages->sendMessage(
                 $this->sendingPhoneNumber,
+                $this->sanitizeNumber($number),
+                $content
+            );*/
+            $this->client->account->messages->sendMessage(
+                $fromNum,
                 $this->sanitizeNumber($number),
                 $content
             );

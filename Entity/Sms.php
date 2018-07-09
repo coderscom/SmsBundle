@@ -41,6 +41,11 @@ class Sms extends FormEntity
     /**
      * @var string
      */
+    private $senderNumber;
+
+    /**
+     * @var string
+     */
     private $description;
 
     /**
@@ -128,6 +133,12 @@ class Sms extends FormEntity
             ->columnName('lang')
             ->build();
 
+       
+        $builder->createField('senderNumber', 'text')
+            ->columnName('sender_num')
+            ->nullable()
+            ->build();
+
         $builder->createField('message', 'text')
             ->build();
 
@@ -173,6 +184,7 @@ class Sms extends FormEntity
                 ]
             )
         );
+     
 
         $metadata->addConstraint(new Callback([
             'callback' => function (Sms $sms, ExecutionContextInterface $context) {
@@ -218,6 +230,7 @@ class Sms extends FormEntity
                 [
                     'id',
                     'name',
+                    'senderNumber',
                     'message',
                     'language',
                     'category',
@@ -270,6 +283,27 @@ class Sms extends FormEntity
     {
         $this->isChanged('name', $name);
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSenderNumber()
+    {
+        return $this->senderNumber;
+    }
+
+    /**
+     * @param string $senderNumber
+     *
+     * @return $this
+     */
+    public function setSenderNumber($senderNumber)
+    {
+        $this->isChanged('senderNumber', $senderNumber);
+        $this->senderNumber = $senderNumber;
 
         return $this;
     }
